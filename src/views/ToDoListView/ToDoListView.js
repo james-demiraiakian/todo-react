@@ -1,8 +1,7 @@
 import React from 'react';
-import ToDoListTile from '../../components/ToDoListTile/ToDoListTile';
-import { createToDo, toggleComplete } from '../../services/todo';
+import { createToDo, deleteToDo, toggleComplete } from '../../services/todo';
 
-export default function ToDoListView(tasks, setTasks, newTask, setNewTask) {
+export default function ToDoListView({ tasks, setTasks, newTask, setNewTask }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const resp = await createToDo(newTask);
@@ -19,16 +18,28 @@ export default function ToDoListView(tasks, setTasks, newTask, setNewTask) {
     );
   };
 
+  const handleDelete = async (id) => {
+    console.log(tasks);
+    await deleteToDo(id);
+    console.log(tasks);
+    const newTasks = tasks.filter((task) => id !== task.id);
+    setTasks(newTasks);
+    console.log(tasks);
+  };
+
   return (
     <div>
       <input type="text" value={newTask} onChange={(e) => setNewTask(e.target.value)} />
       <button onClick={handleSubmit}>Add Task</button>
-      {tasks.map((task) => (
-        <li key={task.id}>
-          <input type="checkbox" checked={task.is_complete} onChange={() => handleClick(task)} />
-          {task.task}
-        </li>
-      ))}
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            <input type="checkbox" checked={task.is_complete} onChange={() => handleClick(task)} />
+            {task.task}
+            <button onClick={handleDelete}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
