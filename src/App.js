@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Header from './containers/Header/Header';
+// import Header from './containers/Header/Header';
 import { getUser, logout } from './services/users';
 import { useState } from 'react';
-import Authenticate from './containers/Authenticate/Authenticate';
+import ToDoListComp from './components/ToDoListComp/ToDoListComp';
+import Auth from './components/Auth/Auth';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(getUser);
@@ -11,22 +12,23 @@ function App() {
   const logoutUser = async () => {
     await logout();
     setCurrentUser(null);
+    <img src="https://http.cat/200" />;
   };
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
         <Switch>
           <Route exact path="/">
             {currentUser && (
               <>
-                <h2>Signed In</h2>
-                <img src="https://http.cat/200" />
+                <ToDoListComp />
+                <h1>ToDo Tasks of List</h1>
                 <button onClick={logoutUser}>Log Out</button>
               </>
             )}
-            {!currentUser && <Authenticate setCurrentUser={setCurrentUser} />}
+            {!currentUser && <Auth setCurrentUser={setCurrentUser} />}
           </Route>
         </Switch>
       </BrowserRouter>

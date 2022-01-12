@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { signInUser, signUpUser } from '../../services/users';
 import classNames from 'classnames';
-import Auth from '../../presentation/Auth/Auth';
+import AuthForm from '../../views/AuthForm/AuthForm';
 
-export default function Authenticate({ setCurrentUser }) {
+export default function Auth({ setCurrentUser }) {
   const [errorMessage, setErrorMessage] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,7 +41,7 @@ export default function Authenticate({ setCurrentUser }) {
         </h3>
       </div>
       <div>Action: {action}</div>
-      <Auth
+      <AuthForm
         errorMessage={errorMessage}
         email={email}
         setEmail={setEmail}
