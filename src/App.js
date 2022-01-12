@@ -19,12 +19,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         {/* <Header /> */}
+        <h1>ToDo Tasks of List</h1>
         <Switch>
           <Route exact path="/">
             {currentUser && (
               <>
                 <ToDoListComp />
-                <h1>ToDo Tasks of List</h1>
                 <button onClick={logoutUser}>Log Out</button>
               </>
             )}
