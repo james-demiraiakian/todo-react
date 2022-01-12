@@ -19,12 +19,10 @@ export default function ToDoListView({ tasks, setTasks, newTask, setNewTask }) {
   };
 
   const handleDelete = async (id) => {
-    console.log(tasks);
     await deleteToDo(id);
-    console.log(tasks);
+    console.log(id);
     const newTasks = tasks.filter((task) => id !== task.id);
     setTasks(newTasks);
-    console.log(tasks);
   };
 
   return (
@@ -36,7 +34,7 @@ export default function ToDoListView({ tasks, setTasks, newTask, setNewTask }) {
           <li key={task.id}>
             <input type="checkbox" checked={task.is_complete} onChange={() => handleClick(task)} />
             {task.task}
-            <button onClick={handleDelete}>Delete</button>
+            <button onClick={() => handleDelete(task.id)}>Delete</button>
           </li>
         ))}
       </ul>
