@@ -20,7 +20,6 @@ export default function ToDoListView({ tasks, setTasks, newTask, setNewTask }) {
 
   const handleDelete = async (id) => {
     await deleteToDo(id);
-    console.log(id);
     const newTasks = tasks.filter((task) => id !== task.id);
     setTasks(newTasks);
   };
